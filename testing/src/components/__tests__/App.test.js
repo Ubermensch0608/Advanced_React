@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import App from "../../App";
-import CommentBox from "../CommentBox";
-import CommentList from "../CommentList";
+import App from "App.js";
+import CommentBox from "components/CommentBox.jsx";
+import CommentList from "components/CommentList.jsx";
 
 it("shows a comment box", () => {
   // Enzyme을 사용하여 수동으로 작성할 필요가 없어짐
