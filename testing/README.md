@@ -115,7 +115,10 @@ App.test.js에서 모든 컴포넌트의 테스트를 진행하면 어떻게 될
 
 ### Enzyme
 
-출처: <a href='https://medium.com/wesionary-team/react-testing-library-vs-enzyme-afd29db380ac'>React Testing Library Vs. Enzyme</a>
+출처:
+<a href='https://enzymejs.github.io/enzyme/'>Enzyme 공식문서 - Airbnb</a>
+
+<a href='https://medium.com/wesionary-team/react-testing-library-vs-enzyme-afd29db380ac'>React Testing Library Vs. Enzyme</a>
 
 Enzyme은 Airbnb에서 만든 인기있는 테스팅 라이브러리이다. 이것은 우리에게 리액트 컴포넌트의 실행 세부사항을 테스트하는 메커니즘을 제공한다. 우리는 이것을 통해 테스트 코드에 적은 컴포넌트와 자식 컴포넌트의 state, props 등에 쉽게 접근할 수 있다.
 
