@@ -1,0 +1,25 @@
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  margin: 30px 50px;
+}
+
+.comment-box label {
+  margin-bottom: 5px;
+}
+
+.comment-box button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  background-color: tomato;
+  color: #fff;
+  padding: 2px 8px;
+  margin: 5px 0;
+  cursor: pointer;
+}

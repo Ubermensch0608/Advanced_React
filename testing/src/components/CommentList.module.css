@@ -1,0 +1,12 @@
+.comments {
+  margin: 10px 50px;
+  list-style: none;
+  width: 250px;
+  padding: 0;
+}
+
+.comments li {
+  border: 2px solid black;
+  padding: 2px 4px;
+  margin: 7px 0;
+}
