@@ -123,4 +123,21 @@ Enzyme은 Airbnb에서 만든 인기있는 테스팅 라이브러리이다. 이�
 
 이러한 이점으로 많은 개발자들이 Enzyme을 사용하고, 나 역시 Enzyme을 사용함으로써 테스트 코드 작성의 편의성을 높이려고 한다.
 
-- dependency 설정
+- **dependency 설정**
+
+  ```
+  npm i --save enzyme enzyme-adapter-react-'자신의 react 버전'
+  ```
+
+  ex. 만약 react 버전이 v16.xx.xx 일 경우 `enzyme-adapter-react-16` 으로 설치하면 된다.
+
+  **※ react v17.xx.xx인 경우 `npm i --save enzyme @wojtekmaj/enzyme-adapter-react-17` 으로 설치한다.**
+
+- **사용법**
+
+  ```
+  import Enzyme from 'enzyme';
+  import Adapter from 'enzyme-adapter-react-16';
+
+  Enzyme.configure({ adapter: new Adapter() });
+  ```
