@@ -144,3 +144,7 @@ Enzyme은 Airbnb에서 만든 인기있는 테스팅 라이브러리이다. 이�
 
   Enzyme.configure({ adapter: new Adapter() });
   ```
+
+### Full Dom redering
+
+Full Dom redering은 우리가 DOM API와 상호작용할 컴포넌트를 갖는 경우에 이상적이다.
