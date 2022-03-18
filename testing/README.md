@@ -145,6 +145,44 @@ Enzyme은 Airbnb에서 만든 인기있는 테스팅 라이브러리이다. 이�
   Enzyme.configure({ adapter: new Adapter() });
   ```
 
-### Full Dom redering
+### Full Rendering API(mount(...))
 
-Full Dom redering은 우리가 DOM API와 상호작용할 컴포넌트를 갖는 경우에 이상적이다.
+<a href='https://enzymejs.github.io/enzyme/docs/api/mount.html'>Enzyme 공식문서 - Full Rendering API</a>
+
+![test-file-structure]('./../public/md-source/enzyme-api-structure.png)
+
+Full DOM redering은 우리가 DOM API와 상호작용할 컴포넌트를 갖는 경우에 이상적이다. 또는, 상위 컴포넌트에 감싸져 있는 컴포넌트를 테스트해야할 때 사용한다.
+
+Full DOM은 이것이 전역 스코프에서 사용가능한 것을 요구한다. 이것은 Full DOM이 브라우저 처럼 보이는 환경에서 구동되어야하는 것을 의미한다. 만약 우리가 브라우저 안에서 테스트 실행을 원하지 않는다면, `mount`를 사용하기 위한 권장 접근법은 JS에서 완전히 구현된 헤드리스 브라우저인 `jsdom`이라 불리는 라이브러리에 의존하는 것이다.
+
+| **Note**: `shallow`또는 `static`렌더링과는 달리, `full`렌더링은 실제로 그 컴포넌트를 DOM에 마운트한다. 이것은 만약 그 컴포넌트들이 모두 같은 DOM에서 사용된다면, 테스트가 서로에게 영향을 미칠 수 있는 것을 의미하는 것이기도 하다. 그렇기 때문에 우리가 테스트를 작성하는 과정에서 필요하다면, `unmount()`와 비슷한 클린업 처리를 잊지 않아야한다.
+
+```
+import { mount } from 'enzyme';
+import sinon from 'sinon';
+import Foo from './Foo';
+
+describe('<Foo />', () => {
+  it('calls componentDidMount', () => {
+    sinon.spy(Foo.prototype, 'componentDidMount');
+    const wrapper = mount(<Foo />);
+    expect(Foo.prototype.componentDidMount).to.have.property('callCount', 1);
+  });
+
+  it('allows us to set props', () => {
+    const wrapper = mount(<Foo bar="baz" />);
+    expect(wrapper.props().bar).to.equal('baz');
+    wrapper.setProps({ bar: 'foo' });
+    expect(wrapper.props().bar).to.equal('foo');
+  });
+
+  it('simulates click events', () => {
+    const onButtonClick = sinon.spy();
+    const wrapper = mount((
+      <Foo onButtonClick={onButtonClick} />
+    ));
+    wrapper.find('button').simulate('click');
+    expect(onButtonClick).to.have.property('callCount', 1);
+  });
+});
+```
