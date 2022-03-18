@@ -1,18 +1,21 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styles from "./CommentBox.module.css";
 
 const CommentBox = (props) => {
-  const commentRef = useRef(null);
-
+  const [comment, setComment] = useState();
   const commentSubmitHandler = (event) => {
     event.preventDefault();
-    const newComment = commentRef.current.value;
 
-    if (newComment.trim().length === 0) {
+    if (comment.trim().length === 0) {
       return;
     }
-    props.onAddComment(newComment);
-    commentRef.current.value = "";
+    props.onAddComment(comment);
+    setComment("");
+  };
+
+  const getCommentHandler = (event) => {
+    const newComment = event.target.value;
+    setComment(newComment);
   };
 
   return (
@@ -21,7 +24,8 @@ const CommentBox = (props) => {
       <textarea
         id="comment"
         placeholder="Here is my comment"
-        ref={commentRef}
+        onChange={getCommentHandler}
+        value={comment}
       />
       <button type="submit">Submit</button>
     </form>
