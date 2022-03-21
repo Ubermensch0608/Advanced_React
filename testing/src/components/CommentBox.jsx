@@ -27,7 +27,9 @@ const CommentBox = (props) => {
         onChange={getCommentHandler}
         value={comment}
       />
-      <button type="submit">Submit</button>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   );
 };
