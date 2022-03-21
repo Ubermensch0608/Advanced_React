@@ -8,9 +8,9 @@ beforeEach(() => {
   wrapped = mount(<CommentBox />);
 });
 
-afterEach(() => {
-  wrapped.unmount();
-});
+// afterEach(() => {
+//   wrapped.unmount();
+// });
 
 it("has a textarea and a button", () => {
   expect(wrapped.find("textarea").length).toEqual(1);

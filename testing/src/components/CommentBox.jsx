@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import saveComment from "store/actions";
 import styles from "./CommentBox.module.css";
 
-const CommentBox = ({ onAddComment }) => {
+const CommentBox = () => {
+  const dispatch = useDispatch();
+
   const [comment, setComment] = useState();
   const commentSubmitHandler = (event) => {
     event.preventDefault();
@@ -10,7 +15,7 @@ const CommentBox = ({ onAddComment }) => {
       return;
     }
 
-    onAddComment(comment);
+    dispatch(saveComment(comment));
     setComment("");
   };
 
