@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CommentBox.module.css";
 
-const CommentBox = (props) => {
+const CommentBox = ({ onAddComment }) => {
   const [comment, setComment] = useState();
   const commentSubmitHandler = (event) => {
     event.preventDefault();
@@ -9,7 +9,8 @@ const CommentBox = (props) => {
     if (comment.trim().length === 0) {
       return;
     }
-    props.onAddComment(comment);
+
+    onAddComment(comment);
     setComment("");
   };
 
