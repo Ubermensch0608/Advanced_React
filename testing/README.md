@@ -241,3 +241,5 @@ describe('<Foo />', () => {
 
 두 방법 모두 오류가 성공적으로 해결되었다.
 ![리덕스_테스트_오류해결](img/testing-redux-pass.png)
+
+### reducer test
