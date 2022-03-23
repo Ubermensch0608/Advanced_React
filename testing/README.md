@@ -211,3 +211,33 @@ describe('<Foo />', () => {
 
 - 첫 번째 테스트는 decribe로 묶여 있지 않아, 첫 번째 beforeEach만 흐름에 포함된다.
 - 반면, 나머지 테스트는 'the text area'라눈 describe로 묶여 있으며, 해당 지역 스코프에 생성된 두 번째 beforeEach의 적용을 받고 테스트를 진행하는 흐름을 확인할 수 있다.
+
+### redux적용과 test 오류
+
+- redux를 적용하고 test를 실행하면 기능상에 문제가 없음에도 불구하고 오류가 발생한다.
+- redux를 사용하기 위해 우리는 가장 상위 컴포넌트인<App/>을 <Provider>로 감싸고 store를 지정해주어 전역으로 상태를 사용할 수 있었다.
+- 하지만, test를 진행할 때는 따로 Provider로 지정해준 것이 없다.
+- 이것은 마치 다음 그림처럼 동떨어진 컴포넌트를 테스트하는 것과 같다.  
+  ![리덕스_테스트_오류](img/testing-redux-error.png)
+
+**해결방안**
+
+1. 직접 Provider와 store 지정
+
+   다음과 같이 테스트하는 컴포넌트에 <Provider>와 store를 지정해주었다.
+   ![리덕스_테스트_프로바이더설정](img/testing-provider.png)
+
+2. 재사용가능한 Provider 컴포넌트 생성
+
+- 모든 자식 컴포넌트를 Provider로 감싸는 Root컴포넌트 생성
+- 감싸지는 컴포넌트에서는 store에 접근할 수 있다.
+- 자식 컴포넌트는 모두 store에 접근이 가능하기 때문에 원하는 컴포넌트에 재사용 가능
+  ![리덕스_테스트_프로바이더설정](img/testing_root_component.png)
+
+**CommentBox에 적용**
+
+- 테스트가 진행되는 <CommentBox/>컴포넌트에 Root컴포넌트를 씌워 store에 접근
+  ![리덕스_테스트_프로바이더설정](img/testing_root_component_2.png)
+
+두 방법 모두 오류가 성공적으로 해결되었다.
+![리덕스_테스트_오류해결](img/testing-redux-pass.png)
