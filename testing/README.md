@@ -243,3 +243,51 @@ describe('<Foo />', () => {
 ![리덕스_테스트_오류해결](img/testing-redux-pass.png)
 
 ### reducer test
+
+- action에 가상의 state 변화를 주어 실제로 state 업데이트가 작동되는지 테스트
+- action.type이 정확하지 않을 때, 빈 state값이 나오는지 테스트
+
+```
+import commentsReducer from "store/reducers/comments";
+import { SAVE_COMMENT } from "store/actions/types";
+
+it("handles actions of types SAVE_COMMENT", () => {
+  const action = {
+    type: SAVE_COMMENT,
+    payload: "New Comment",
+  };
+
+  const newState = commentsReducer([], action);
+  expect(newState).toEqual(["New Comment"]);
+});
+
+it("handles actions with unknown type", () => {
+  const newState = commentsReducer([], { type: "SDFSDNFLKDNF" });
+
+  expect(newState).toEqual([]);
+});
+```
+
+### actions test
+
+- type 테스트 → saveComment의 타입이 SAVE_COMMENT의 타입과 일치하는지
+- payload 테스트 → saveComment 의 인자로 임의 값을 부여했을 때, 그것이 payload 값과 동일한지
+
+```
+import saveComment from "store/actions";
+import { SAVE_COMMENT } from "../types";
+
+describe("saveComment", () => {
+  it("has the correct type", () => {
+    const action = saveComment();
+
+    expect(action.type).toEqual(SAVE_COMMENT);
+  });
+
+  it("has the correct payload", () => {
+    const action = saveComment("New Comment");
+
+    expect(action.payload).toEqual("New Comment");
+  });
+});
+```
