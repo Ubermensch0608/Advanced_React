@@ -291,3 +291,13 @@ describe("saveComment", () => {
   });
 });
 ```
+
+### 테스트의 범위
+
+![테스트_범위](img/test-boundary.png)
+
+**단위 테스트(unit test)**
+
+-
+
+**통합 테스트(integration test)**
