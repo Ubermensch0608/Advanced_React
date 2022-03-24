@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import saveComment from "store/actions";
+import { fetchComments, saveComment } from "store/actions";
 import styles from "./CommentBox.module.css";
 
 const CommentBox = () => {
   const dispatch = useDispatch();
+  const [comment, setComment] = useState("");
 
-  const [comment, setComment] = useState();
   const commentSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -24,19 +24,26 @@ const CommentBox = () => {
     setComment(newComment);
   };
 
+  const fetchCommentsHandler = () => {
+    dispatch(fetchComments(comment));
+  };
+
   return (
-    <form className={styles["comment-box"]} onSubmit={commentSubmitHandler}>
-      <label htmlFor="comment">Enter a Comment</label>
-      <textarea
-        id="comment"
-        placeholder="Here is my comment"
-        onChange={getCommentHandler}
-        value={comment}
-      />
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div>
+      <form className={styles["comment-box"]} onSubmit={commentSubmitHandler}>
+        <label htmlFor="comment">Enter a Comment</label>
+        <textarea
+          id="comment"
+          placeholder="Here is my comment"
+          onChange={getCommentHandler}
+          value={comment}
+        />
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <button onClick={fetchCommentsHandler}>Fetch Comment</button>
+    </div>
   );
 };
 
